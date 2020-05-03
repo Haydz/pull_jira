@@ -2,8 +2,8 @@
 
 # How to Run:
 ```
-go run ./main.go <username> <password> <apiurl>
-ex: go run /main.go user password https://your-domain.atlassian.net/rest/api/2/issue/createmeta
+go run ./main.go <username> <password> <domain>
+ex: go run /main.go user password domain.jira.com
 ```
 
 # Caution:

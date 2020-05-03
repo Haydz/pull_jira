@@ -94,6 +94,7 @@ https://tanaikech.github.io/2017/09/15/spreadsheets.values.batchupdate-using-gol
 
 https://developer.atlassian.com/cloud/jira/platform/rest/v3/#api-rest-api-3-search-get
 
+
 */
 
 func queryJira(username string, password string, query []string, dataToAdd []string, apiURL string) []byte {
@@ -163,7 +164,7 @@ func main() {
 	}
 	var username = os.Args[1]
 	var password = os.Args[2]
-	var ApiURL = "https://" + os.Args[3] + "/rest/api/2/search"
+	var ApiURL = "https://" + os.Args[3] + "/rest/api/latest/search"
 
 	var dataToAdd []string
 
