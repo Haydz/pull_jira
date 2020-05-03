@@ -96,13 +96,13 @@ https://developer.atlassian.com/cloud/jira/platform/rest/v3/#api-rest-api-3-sear
 
 */
 
-func queryJira(username string, password string, query []string, dataToAdd []string) []byte {
+func queryJira(username string, password string, query []string, dataToAdd []string, apiURL string) []byte {
 
 	username = username
 	passwd := password
 
 	//function to call Jira, allow different queries
-	apiURL := "https://jira.points.com/rest/api/2/search"
+	//apiURL := "https://jira.points.com/rest/api/2/search"
 	resource := "/rest/api/2/search"
 	data := url.Values{}
 	data.Set(query[0], query[1])
@@ -158,11 +158,12 @@ func Find(a []string, x string) int {
 func main() {
 
 	// == THIS IS FOR ENTERING CREDENTIALS ON THE COMMAND LINE
-	if len(os.Args) != 3 {
+	if len(os.Args) != 4 {
 		log.Fatalln("Usage: main username password")
 	}
 	var username = os.Args[1]
 	var password = os.Args[2]
+	var ApiURL = os.Args[3]
 
 	var dataToAdd []string
 
@@ -197,7 +198,7 @@ func main() {
 
 	query := []string{"jql", "project=srr and status != Resolved  AND  issuetype not in subtaskIssueTypes()"}
 	fmt.Println("Will run this query in JIRA:: ", query[1])
-	jiraResponse := queryJira(username, password, query, dataToAdd)
+	jiraResponse := queryJira(username, password, query, dataToAdd, ApiURL)
 
 	var jiraIssues Issues
 	json.Unmarshal([]byte(jiraResponse), &jiraIssues)
