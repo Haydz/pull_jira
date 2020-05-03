@@ -159,7 +159,7 @@ func main() {
 
 	// == THIS IS FOR ENTERING CREDENTIALS ON THE COMMAND LINE
 	if len(os.Args) != 4 {
-		log.Fatalln("Usage: main username password")
+		log.Fatalln("Usage: main <username> <password> <APIURL>")
 	}
 	var username = os.Args[1]
 	var password = os.Args[2]
