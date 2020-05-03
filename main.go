@@ -159,12 +159,13 @@ func Find(a []string, x string) int {
 func main() {
 
 	// == THIS IS FOR ENTERING CREDENTIALS ON THE COMMAND LINE
-	if len(os.Args) != 4 {
+	if len(os.Args) != 5 {
 		log.Fatalln("Usage: main <username> <password> <domain>")
 	}
 	var username = os.Args[1]
 	var password = os.Args[2]
 	var ApiURL = "https://" + os.Args[3] + "/rest/api/latest/search"
+	var jiraProject = os.Args[4]
 
 	var dataToAdd []string
 
@@ -197,7 +198,7 @@ func main() {
 	//fmt.Println("DATATOADD", fieldsToChoose)
 	//dataToAdd := []string{"key", "updated", "summary", "created", "status", "priority", "assignee"}
 
-	query := []string{"jql", "project=srr and status != Resolved  AND  issuetype not in subtaskIssueTypes()"}
+	query := []string{"jql", "project=" + jiraProject, "and status != Resolved  AND  issuetype not in subtaskIssueTypes()"}
 	fmt.Println("Will run this query in JIRA:: ", query[1])
 	jiraResponse := queryJira(username, password, query, dataToAdd, ApiURL)
 
