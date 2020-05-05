@@ -159,14 +159,14 @@ func Find(a []string, x string) int {
 func main() {
 
 	// == THIS IS FOR ENTERING CREDENTIALS ON THE COMMAND LINE
-	if len(os.Args) != 5 {
-		log.Fatalln("Usage: main <username> <password> <domain>")
+	if len(os.Args) != 6 {
+		log.Fatalln("Usage: main <username> <password> <domain> <ticket status>")
 	}
 	var username = os.Args[1]
 	var password = os.Args[2]
 	var ApiURL = "https://" + os.Args[3] + "/rest/api/latest/search"
 	var jiraProject = os.Args[4]
-
+	var ticketStatus = os.Args[5]
 	var dataToAdd []string
 
 	reader := bufio.NewReader(os.Stdin)
@@ -195,10 +195,8 @@ func main() {
 		fieldsToChoose = remove(fieldsToChoose, valueInt)
 
 	}
-	//fmt.Println("DATATOADD", fieldsToChoose)
-	//dataToAdd := []string{"key", "updated", "summary", "created", "status", "priority", "assignee"}
 
-	query := []string{"jql", "project=" + jiraProject, "and status != Resolved  AND  issuetype not in subtaskIssueTypes()"}
+	query := []string{"jql", "project=" + jiraProject, "and status = " + ticketStatus, "  AND  issuetype not in subtaskIssueTypes()"}
 	fmt.Println("Will run this query in JIRA:: ", query[1])
 	jiraResponse := queryJira(username, password, query, dataToAdd, ApiURL)
 
@@ -206,11 +204,11 @@ func main() {
 	json.Unmarshal([]byte(jiraResponse), &jiraIssues)
 	//fmt.Println(issues)
 	for _, issue := range jiraIssues.Issues {
-		//fmt.Println(issue.Key+"\t", issue.Fields.Summary+"\t", issue.Fields.Priority.Name+"\t", issue.Self)
+
 		fmt.Print(issue.Key, " ")
 		for _, value := range dataToAdd {
-			//switch statements for adding values
-			// KEY value is Default
+			//switch statements for adding selected fields
+			// KEY value is printed to screen by defaultefault
 			switch value {
 			case "created":
 				formatCreated := fmt.Sprintf("%d-%02d-%02d", issue.Fields.Created.Year(), issue.Fields.Created.Month(), issue.Fields.Created.Day())
@@ -227,16 +225,9 @@ func main() {
 			case "assignee":
 				fmt.Print(issue.Fields.Assignee.Name, " ")
 			}
-			//formatCreated := fmt.Sprintf("%d-%02d-%02d", issues.Issues[key].Fields.Created.Year(), issues.Issues[key].Fields.Created.Month(), issues.Issues[key].Fields.Created.Day())
-			//formatUpdated := fmt.Sprintf("%d-%02d-%02d", issues.Issues[key].Fields.Updated.Year(), issues.Issues[key].Fields.Updated.Month(), issues.Issues[key].Fields.Updated.Day())
-			//writing each row into the interface to send
 
 		}
 		fmt.Println()
 
 	}
 }
-
-// NEED TO ADD FORMATTING FOR TIME
-
-//https://www.prudentdevs.club/gsheets-go
