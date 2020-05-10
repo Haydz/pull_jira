@@ -10,5 +10,5 @@ jobs:
          uses: haydz/trufflehog-actions-scan@master
          with:
            branch: ${{ github.head_ref }}
-           scanArguments: "--max_depth=5  --rules /regexes.json"
+           scanArguments: "--max_depth=5  --rules regexes.json"
            #test run
