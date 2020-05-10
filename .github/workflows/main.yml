@@ -11,4 +11,4 @@ jobs:
          with:
            branch: ${{ github.head_ref }}
            scanArguments: "--max_depth=10  --rules /regexes2.json"
-           #test run
+           #test runs
