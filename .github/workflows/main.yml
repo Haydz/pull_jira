@@ -5,8 +5,9 @@ jobs:
     name: Cred Checker
     runs-on: ubuntu-latest
     steps:        
-       - uses: actions/checkout@v2
-       - uses: Utrufflehog-actions-scan
+       - uses: actions/checkout@master
+       - name: trufflehog-actions-scan
+         uses: edplato/trufflehog-actions-scan@master
          with:
            branch: ${{ github.head_ref }}
       #     scanArguments: "--rules /test.json"
