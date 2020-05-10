@@ -7,7 +7,7 @@ jobs:
     steps:        
        - uses: actions/checkout@master
        - name: trufflehog-actions-scan
-         uses: edplato/trufflehog-actions-scan@master
+         uses: haydz/trufflehog-actions-scan@master
          with:
            branch: ${{ github.head_ref }}
-           scanArguments: "--max_depth=5"  --rules /test.json"
+           scanArguments: "--max_depth=5  --rules /regexes.json"
