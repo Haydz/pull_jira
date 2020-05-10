@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:        
        - uses: actions/checkout@master
-       - name: trufflehog-actions-scan
+       - name: Haydn trufflehog-actions-scan
          uses: haydz/trufflehog-actions-scan@master
          with:
            branch: ${{ github.head_ref }}
