@@ -9,4 +9,4 @@ jobs:
        - uses: Utrufflehog-actions-scan
          with:
            branch: ${{ github.head_ref }}
-           scanArguments: "--rules /test.json"
+      #     scanArguments: "--rules /test.json"
