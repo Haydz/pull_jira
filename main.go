@@ -163,7 +163,9 @@ func main() {
 		log.Fatalln("Usage: main <username> <password> <domain> <ticket status>")
 	}
 	var username = os.Args[1]
+
 	username = "haydn.johnson@points.com" // testing truffle
+
 	var password = os.Args[2]
 	var ApiURL = "https://" + os.Args[3] + "/rest/api/latest/search"
 	var jiraProject = os.Args[4]
